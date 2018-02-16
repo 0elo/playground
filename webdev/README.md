@@ -1,2 +1,3 @@
 # Web Development
-### [Spectrum](https://cdn.rawgit.com/0elo/playground/c9243f6d/webdev/spectrum.html)
+### Basic HTML + CSS: [Spectrum](https://cdn.rawgit.com/0elo/playground/9d15e16a/webdev/spectrum.html)
+### Bootstrap 4.0.0: [Coffee](https://cdn.rawgit.com/0elo/playground/9d15e16a/webdev/coffee.html)
