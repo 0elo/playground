@@ -1,0 +1,16 @@
+td {
+  height: 150px;
+  width: 150px;
+  background-color: white;
+  border: 3px solid black;
+  text-align: center;
+  font-size: 80px;
+}
+
+h1 {
+  color: #118AB2;
+}
+
+p {
+  color: #118AB2;
+}
