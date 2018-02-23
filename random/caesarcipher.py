@@ -2,7 +2,7 @@
 
 '''
 February challenge from py-study-group/challenges:
-Caesar cipher encoder/decoder (Intermediate)
+Caesar cipher encoder/decoder (Advanced)
 
 Link: https://github.com/py-study-group/challenges/tree/master/February
 
@@ -16,9 +16,6 @@ from polyglot.text import Text
 #__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 __location__ = Path.cwd()
-
-#print(__location__)
-#print(newloc)
 
 ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 ALPHABET_LEN = 26
