@@ -106,8 +106,9 @@ class Cipher:
 
         if self.detectEnglish(self.string):
             return(0,self.string,self.string)
-        temp = self.string
-        cleaned = self.cleanString(temp)
+        #temp = self.string
+        #cleaned = self.cleanString(temp)
+        cleaned = self.cleanString(self.string)
         letters = dict.fromkeys(cleaned, 0)
         for letter in self.string.lower():
             if letter in letters:
@@ -198,10 +199,10 @@ class handleArgs:
         
     def getArgs(self):
         
-        parser = argparse.ArgumentParser(description='Caesar cipher encoder/decoder.')
+        parser = argparse.ArgumentParser(description='This is a multifunctional Caesar cipher tool written in Python 3.6. The detect command takes an string encrypted by a Caesar cipher with an unknown shift, and makes a prediction of the how the string was encoded. The file and string commands call functionality to encode or decode a string by a user-specified shift. The string can be read in from the command line or a file.')
 
-        subparser = parser.add_subparsers(dest='selection',help = 'commands')
-        subparser.required = True
+        subparser = parser.add_subparsers(dest='selection', help = 'commands')
+        subparser.required = False
         # Detect Command
         detect_command = subparser.add_parser('detect', help='Detect shift of an encoded string')
         detect_command.add_argument('d_file', action='store', help='File to be decoded')
@@ -221,30 +222,8 @@ class handleArgs:
         args = vars(parser.parse_args())
         #print(args)
         
-        if 'd_file' in args:
+        if args['selection'] == 'detect':
             self.handleDetect = True
-        elif 'f_conversion' in args:
-            self.conversion = args['f_conversion']
-            self.handleFile = True
-            self.shift = args['f_shift']
-        elif 't_conversion' in args:
-            self.conversion = args['t_conversion']
-            self.handleText = True
-            self.shift = args['t_shift']
-
-        if self.handleFile:
-#            if os.path.isfile(args['thefile']):
-            if Path(args['thefile']).is_file():
-                theFile = open(Path(__location__ / args['thefile']), 'r')
-                self.string = ''.join([line for line in theFile])
-                theFile.close()
-            else:
-                parser.error('Could not locate file!')
-                
-        elif self.handleText:
-            self.string = args['thetext']
-
-        elif self.handleDetect:
             if Path(args['d_file']).is_file():
                 theFile = open(Path(__location__ / args['d_file']), 'r')
                 self.string = ''.join([line for line in theFile])
@@ -253,7 +232,28 @@ class handleArgs:
             else:
                 parser.error('Could not locate file!')
             self.conversion = 'decode'
+            
+        elif args['selection'] == 'file':
+            self.conversion = args['f_conversion']
+            self.handleFile = True
+            self.shift = args['f_shift']
+            if Path(args['thefile']).is_file():
+                theFile = open(Path(__location__ / args['thefile']), 'r')
+                self.string = ''.join([line for line in theFile])
+                theFile.close()
+            else:
+                parser.error('Could not locate file!')
+
+        elif args['selection'] == 'text':
+            self.conversion = args['t_conversion']
+            self.handleText = True
+            self.shift = args['t_shift']
+            self.string = args['thetext']
+        
         else:
+            '''
+            This statement never runs. Need to check how to make args optional
+            '''
             self.string = input('Please enter a sentence: ')
             conversionType = input('Encode or decode: ')
             while conversionType != 'encode' or conversionType != 'decode':
@@ -270,12 +270,13 @@ class handleArgs:
             self.decodeFlag = True
         else:
             parser.error("Enter 'encode' or 'decode' for the conversion argument!")
+
         if ALPHABET_LEN < self.shift:
             self.shift = self.shift % ALPHABET_LEN
 
             
 if __name__ == '__main__':
-    print('\n{}\nC A E S A R   C I P H E R\n{}\n'.format('*'*24,'*'*24))
+    print('\n{}\n        Z E R O E L O \' S\n    C A E S A R   C I P H E R\n{}\n'.format('*'*36,'*'*36))
     
     args = handleArgs()
     args.getArgs()
